@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sample</title>
+    <link rel="stylesheet" href="./css/easymde.min.css">
+    <script src="./js/easymde.min.js"></script>
+    <script src="./js/mermaid.min.js"></script>
+</head>
+
+<body>
+  <textarea></textarea>
+  <script>
+    const easyMDE = new EasyMDE({
+        autofocus: true,
+        autosave: {
+            enabled: true,
+            uniqueId: "MyUniqueID",
+            delay: 1000,
+            submit_delay: 5000,
+            timeFormat: {
+		locale: 'en-US',
+		format: {
+                    year: 'numeric',
+                    month: 'long',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+		},
+            },
+            text: "Autosaved: "
+	},
+	renderingConfig: {
+	    markedOptions: {
+		langPrefix: "",
+		highlight: function (code, lang) {
+		    if (lang === "mermaid") {
+			unescapeHTML = function(code) {
+			    return code.replace(/&lt;/g,'<')
+				.replace(/&gt;/g,'>');
+			}
+			code = unescapeHTML(code);
+			return mermaid.mermaidAPI.render('mermaid0',code,undefined);
+		    }
+		    return null;
+		}
+	    }
+	}
+    });
+  </script>
+</body>
+
+</html>
