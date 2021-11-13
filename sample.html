@@ -7,8 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sample</title>
     <link rel="stylesheet" href="./css/easymde.min.css">
+    <link rel="stylesheet" href="./css/default.min.css">
     <script src="./js/easymde.min.js"></script>
     <script src="./js/mermaid.min.js"></script>
+    <script src="./js/highlight.min.js"></script>
 </head>
 
 <body>
@@ -39,8 +41,10 @@
 		highlight: function (code, lang) {
 		    if (lang === "mermaid") {
 			return mermaid.mermaidAPI.render('mermaid0',code,undefined);
+		    } else {
+			const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+			return hljs.highlight(code, { language }).value;
 		    }
-		    return null;
 		}
 	    }
 	}
